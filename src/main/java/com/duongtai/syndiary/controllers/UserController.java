@@ -29,7 +29,9 @@ public class UserController {
 
     @GetMapping("profile/{username}")
     public ResponseEntity<ResponseObject> getUserByUsername(@PathVariable String username){
+
     	User user = userService.getUserByUsername(username);
+		System.out.println("Username"+user.getUsername());
     	UserDTO userDTO = ConvertEntity.convertToDTO(user);
 		return ResponseEntity.status(HttpStatus.OK).body(
 				new ResponseObject(Snippets.SUCCESS, Snippets.USER_FOUND, userDTO));
@@ -115,5 +117,7 @@ public class UserController {
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         userService.refreshToken(request,response);
     }
+
+
 
 }

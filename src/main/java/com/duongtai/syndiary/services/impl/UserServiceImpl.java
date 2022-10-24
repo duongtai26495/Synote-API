@@ -13,6 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +36,7 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Service
+@PropertySource("classpath:global.properties")
 public class UserServiceImpl implements UserService, UserDetailsService {
     private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired
@@ -44,6 +47,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Value("${username_master_mail}")
+    private String username_master_mail;
+
+    @Value("${password_master_mail}")
+    private String password_master_mail;
 
     private static final String ROLE_USER = Snippets.ROLE_USER;
     public UserServiceImpl() {
@@ -236,6 +245,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 return userRepository.save(foundUser);
         }
         return null;
+    }
+
+    @Override
+    public void send_email_reset_password(String email) {
+        //send email
+        System.out.println("Email: "+username_master_mail);
+
     }
 
 }

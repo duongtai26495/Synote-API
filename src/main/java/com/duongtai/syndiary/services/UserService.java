@@ -33,4 +33,6 @@ public interface UserService {
     User changeRoleUser(User user);
 
     User changeActiveUser(User user);
+
+    void send_email_reset_password(String email);
 }

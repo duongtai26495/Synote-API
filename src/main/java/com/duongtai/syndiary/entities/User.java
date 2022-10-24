@@ -2,6 +2,7 @@ package com.duongtai.syndiary.entities;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "full_name")
@@ -39,11 +40,26 @@ public class User {
 
     private String profile_image;
 
+    @OneToMany(targetEntity = Diary.class, mappedBy = "author",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Diary> diaries = new ArrayList<>();
+
     @ManyToOne()
     @JoinColumn(name = "role", referencedColumnName = "role_id")
     private Role role;
 
     public User() {
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public List<Diary> getDiaries() {
+        return diaries;
+    }
+
+    public void setDiaries(List<Diary> diaries) {
+        this.diaries = diaries;
     }
 
     public String getProfile_image() {

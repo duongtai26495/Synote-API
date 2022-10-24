@@ -22,5 +22,10 @@ public class HomeController {
         return storageService.readFile(fileName);
     }
 
-
+    @PostMapping("forgot_password")
+    public void forgot_password(@RequestParam("email") String email){
+        if(userService.findByEmail(email) != null){
+            userService.send_email_reset_password(email);
+        }
+    }
 }
