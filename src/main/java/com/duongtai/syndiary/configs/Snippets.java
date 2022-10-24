@@ -81,4 +81,6 @@ public class Snippets {
     public static final String UPDATED_SUCCESS = "Updated %s success";
     public static final String DELETED_SUCCESS = "Delete %s success";
     public static final String NOT_FOUND = "%s with id %s not found";
+
+    public static final String PING_SUCCESS = "Ping server success";
 }
