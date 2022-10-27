@@ -38,6 +38,7 @@ public class User {
 
     private int gender;
 
+    @Column(name = "profule_image",length = 512)
     private String profile_image;
 
     @OneToMany(targetEntity = Diary.class, mappedBy = "author",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
