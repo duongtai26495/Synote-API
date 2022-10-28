@@ -31,7 +31,6 @@ public class UserController {
     public ResponseEntity<ResponseObject> getUserByUsername(@PathVariable String username){
 
     	User user = userService.getUserByUsername(username);
-		System.out.println("Username"+user.getUsername());
     	UserDTO userDTO = ConvertEntity.convertToDTO(user);
 		return ResponseEntity.status(HttpStatus.OK).body(
 				new ResponseObject(Snippets.SUCCESS, Snippets.USER_FOUND, userDTO));
