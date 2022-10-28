@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public synchronized User editByUsername(User user) {
+    public synchronized User    editByUsername(User user) {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat(Snippets.TIME_PATTERN);
         User getUser = userRepository.findByUsername(user.getUsername());
@@ -131,10 +131,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         if(user.getProfile_image() != null && !user.getProfile_image().equals(getUser.getProfile_image())){
             getUser.setProfile_image(user.getProfile_image());
-        }
-
-        if(user.getActive() != getUser.getActive()) {
-            getUser.setActive(!getUser.getActive());
         }
 
         if(user.getFull_name() != null){
